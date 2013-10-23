@@ -82,6 +82,7 @@
 
 #if (defined(__IPHONE_OS_VERSION_MAX_ALLOWED) && __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000) || (defined(__MAC_OS_X_VERSION_MAX_ALLOWED) && __MAC_OS_X_VERSION_MAX_ALLOWED >= 1090)
 
+NS_CLASS_AVAILABLE(10_9, 7_0)
 @interface AFURLSessionManager : NSObject <NSURLSessionDelegate, NSURLSessionTaskDelegate, NSURLSessionDataDelegate, NSURLSessionDownloadDelegate, NSCoding, NSCopying>
 
 /**
@@ -386,49 +387,49 @@
 /**
  Posted when a task begins executing.
  */
-extern NSString * const AFNetworkingTaskDidStartNotification;
+extern NSString * const AFNetworkingTaskDidStartNotification NS_AVAILABLE(10_9, 7_0);
 
 /**
  Posted when a task finishes executing. Includes a userInfo dictionary with additional information about the task.
  */
-extern NSString * const AFNetworkingTaskDidFinishNotification;
+extern NSString * const AFNetworkingTaskDidFinishNotification NS_AVAILABLE(10_9, 7_0);
 
 /**
  Posted when a task suspends its execution.
  */
-extern NSString * const AFNetworkingTaskDidSuspendNotification;
+extern NSString * const AFNetworkingTaskDidSuspendNotification NS_AVAILABLE(10_9, 7_0);
 
 /**
  Posted when a session is invalidated.
  */
-extern NSString * const AFURLSessionDidInvalidateNotification;
+extern NSString * const AFURLSessionDidInvalidateNotification NS_AVAILABLE(10_9, 7_0);
 
 /**
  Posted when a session download task encountered an error when moving the temporary download file to a specified destination.
  */
-extern NSString * const AFURLSessionDownloadTaskDidFailToMoveFileNotification;
+extern NSString * const AFURLSessionDownloadTaskDidFailToMoveFileNotification NS_AVAILABLE(10_9, 7_0);
 
 /**
  The raw response data of the task. Included in the userInfo dictionary of the `AFNetworkingTaskDidFinishNotification` if response data exists for the task.
  */
-extern NSString * const AFNetworkingTaskDidFinishResponseDataKey;
+extern NSString * const AFNetworkingTaskDidFinishResponseDataKey NS_AVAILABLE(10_9, 7_0);
 
 /**
  The serialized response object of the task. Included in the userInfo dictionary of the `AFNetworkingTaskDidFinishNotification` if the response was serialized.
  */
-extern NSString * const AFNetworkingTaskDidFinishSerializedResponseKey;
+extern NSString * const AFNetworkingTaskDidFinishSerializedResponseKey NS_AVAILABLE(10_9, 7_0);
 
 /**
  The response serializer used to serialize the response. Included in the userInfo dictionary of the `AFNetworkingTaskDidFinishNotification` if the task has an associated response serializer.
  */
-extern NSString * const AFNetworkingTaskDidFinishResponseSerializerKey;
+extern NSString * const AFNetworkingTaskDidFinishResponseSerializerKey NS_AVAILABLE(10_9, 7_0);
 
 /**
  The file path associated with the download task. Included in the userInfo dictionary of the `AFNetworkingTaskDidFinishNotification` if an the response data has been stored directly to disk.
  */
-extern NSString * const AFNetworkingTaskDidFinishAssetPathKey;
+extern NSString * const AFNetworkingTaskDidFinishAssetPathKey NS_AVAILABLE(10_9, 7_0);
 
 /**
  Any error associated with the task, or the serialization of the response. Included in the userInfo dictionary of the `AFNetworkingTaskDidFinishNotification` if an error exists.
  */
-extern NSString * const AFNetworkingTaskDidFinishErrorKey;
+extern NSString * const AFNetworkingTaskDidFinishErrorKey NS_AVAILABLE(10_9, 7_0);

@@ -28,9 +28,9 @@
 
 #import "AFURLConnectionOperation.h"
 
-#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000
+//dmw #if __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000
 #import "AFURLSessionManager.h"
-#endif
+//dmw #endif
 
 static void * AFTaskCountOfBytesSentContext = &AFTaskCountOfBytesSentContext;
 static void * AFTaskCountOfBytesReceivedContext = &AFTaskCountOfBytesReceivedContext;
@@ -76,10 +76,10 @@ static char kAFDownloadProgressAnimated;
 
 #pragma mark -
 
-#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000
+//dmw #if __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000
 
 - (void)setProgressWithUploadProgressOfTask:(NSURLSessionUploadTask *)task
-                                   animated:(BOOL)animated
+                                   animated:(BOOL)animated NS_AVAILABLE_IOS(7_0)
 {
     [task addObserver:self forKeyPath:@"state" options:0 context:AFTaskCountOfBytesSentContext];
     [task addObserver:self forKeyPath:@"countOfBytesSent" options:0 context:AFTaskCountOfBytesSentContext];
@@ -88,7 +88,7 @@ static char kAFDownloadProgressAnimated;
 }
 
 - (void)setProgressWithDownloadProgressOfTask:(NSURLSessionDownloadTask *)task
-                                     animated:(BOOL)animated
+                                     animated:(BOOL)animated NS_AVAILABLE_IOS(7_0)
 {
     [task addObserver:self forKeyPath:@"state" options:0 context:AFTaskCountOfBytesReceivedContext];
     [task addObserver:self forKeyPath:@"countOfBytesReceived" options:0 context:AFTaskCountOfBytesReceivedContext];
@@ -96,7 +96,7 @@ static char kAFDownloadProgressAnimated;
     [self af_setDownloadProgressAnimated:animated];
 }
 
-#endif
+//dmw #endif
 
 #pragma mark -
 
@@ -160,24 +160,26 @@ static char kAFDownloadProgressAnimated;
             }
         }
 
-#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000
-        if ([keyPath isEqualToString:NSStringFromSelector(@selector(state))]) {
-            if ([(NSURLSessionTask *)object state] == NSURLSessionTaskStateCompleted) {
-                @try {
-                    [object removeObserver:self forKeyPath:NSStringFromSelector(@selector(state))];
+//dmw #if __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000
+        if ([NSURLSessionTask class]) {
+            if ([keyPath isEqualToString:NSStringFromSelector(@selector(state))]) {
+                if ([(NSURLSessionTask *)object state] == NSURLSessionTaskStateCompleted) {
+                    @try {
+                        [object removeObserver:self forKeyPath:NSStringFromSelector(@selector(state))];
 
-                    if (context == AFTaskCountOfBytesSentContext) {
-                        [object removeObserver:self forKeyPath:NSStringFromSelector(@selector(countOfBytesSent))];
-                    }
+                        if (context == AFTaskCountOfBytesSentContext) {
+                            [object removeObserver:self forKeyPath:NSStringFromSelector(@selector(countOfBytesSent))];
+                        }
 
-                    if (context == AFTaskCountOfBytesReceivedContext) {
-                        [object removeObserver:self forKeyPath:NSStringFromSelector(@selector(countOfBytesReceived))];
+                        if (context == AFTaskCountOfBytesReceivedContext) {
+                            [object removeObserver:self forKeyPath:NSStringFromSelector(@selector(countOfBytesReceived))];
+                        }
                     }
+                    @catch (NSException * __unused exception) {}
                 }
-                @catch (NSException * __unused exception) {}
             }
         }
-#endif
+//dmw #endif
     }
 }
 

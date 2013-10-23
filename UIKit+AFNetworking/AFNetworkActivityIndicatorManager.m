@@ -26,9 +26,9 @@
 
 #import "AFHTTPRequestOperation.h"
 
-#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000
+//dmw #if __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000
 #import "AFURLSessionManager.h"
-#endif
+//dmw #endif
 
 static NSTimeInterval const kAFNetworkActivityIndicatorInvisibilityDelay = 0.17;
 
@@ -37,11 +37,13 @@ static NSURLRequest * AFNetworkRequestFromNotification(NSNotification *notificat
         return [(AFURLConnectionOperation *)[notification object] request];
     }
 
-#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000
-    if ([[notification object] respondsToSelector:@selector(originalRequest)]) {
-        return [(NSURLSessionTask *)[notification object] originalRequest];
+//dmw #if __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000
+    if ([NSURLSessionTask class]) {
+        if ([[notification object] respondsToSelector:@selector(originalRequest)]) {
+            return [(NSURLSessionTask *)[notification object] originalRequest];
+        }
     }
-#endif
+//dmw #endif
 
     return nil;
 }
@@ -81,11 +83,13 @@ static NSURLRequest * AFNetworkRequestFromNotification(NSNotification *notificat
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(networkRequestDidStart:) name:AFNetworkingOperationDidStartNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(networkRequestDidFinish:) name:AFNetworkingOperationDidFinishNotification object:nil];
 
-#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(networkRequestDidStart:) name:AFNetworkingTaskDidStartNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(networkRequestDidFinish:) name:AFNetworkingTaskDidSuspendNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(networkRequestDidFinish:) name:AFNetworkingTaskDidFinishNotification object:nil];
-#endif
+//dmw #if __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000
+    if ([NSURLSessionTask class]) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(networkRequestDidStart:) name:AFNetworkingTaskDidStartNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(networkRequestDidFinish:) name:AFNetworkingTaskDidSuspendNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(networkRequestDidFinish:) name:AFNetworkingTaskDidFinishNotification object:nil];
+    }
+//dmw #endif
 
     return self;
 }

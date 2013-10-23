@@ -26,14 +26,14 @@
 
 #import "AFHTTPRequestOperation.h"
 
-#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000
+//dmw #if __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000
 #import "AFURLSessionManager.h"
-#endif
+//dmw #endif
 
 @implementation UIActivityIndicatorView (AFNetworking)
 
-#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000
-- (void)setAnimatingWithStateOfTask:(NSURLSessionTask *)task {
+//dmw #if __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000
+- (void)setAnimatingWithStateOfTask:(NSURLSessionTask *)task NS_AVAILABLE_IOS(7_0) {
     NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
 
     [notificationCenter removeObserver:self name:AFNetworkingTaskDidStartNotification object:nil];
@@ -54,7 +54,7 @@
         }
     }
 }
-#endif
+//dmw #endif
 
 #pragma mark -
 

@@ -45,9 +45,9 @@
 
  @param task The task. If `nil`, automatic updating from any previously specified operation will be disabled.
  */
-#if (defined(__IPHONE_OS_VERSION_MIN_REQUIRED) && __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000) || (defined(__MAC_OS_X_VERSION_MIN_REQUIRED) && __MAC_OS_X_VERSION_MIN_REQUIRED >= 1090)
-- (void)setAnimatingWithStateOfTask:(NSURLSessionTask *)task;
-#endif
+//dmw #if (defined(__IPHONE_OS_VERSION_MIN_REQUIRED) && __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000) || (defined(__MAC_OS_X_VERSION_MIN_REQUIRED) && __MAC_OS_X_VERSION_MIN_REQUIRED >= 1090)
+- (void)setAnimatingWithStateOfTask:(NSURLSessionTask *)task NS_AVAILABLE(10_9, 7_0);
+//dmw #endif
 
 ///---------------------------------------
 /// @name Animating for Request Operations
@@ -55,7 +55,7 @@
 
 /**
  Binds the animating state to the execution state of the specified operation.
- 
+
  @param operation The operation. If `nil`, automatic updating from any previously specified operation will be disabled.
  */
 - (void)setAnimatingWithStateOfOperation:(AFURLConnectionOperation *)operation;

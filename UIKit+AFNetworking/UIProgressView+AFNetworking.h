@@ -41,14 +41,14 @@
 
 /**
  Binds the progress to the upload progress of the specified session task.
- 
+
  @param task The session task.
  @param animated `YES` if the change should be animated, `NO` if the change should happen immediately.
  */
-#if (defined(__IPHONE_OS_VERSION_MIN_REQUIRED) && __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000) || (defined(__MAC_OS_X_VERSION_MIN_REQUIRED) && __MAC_OS_X_VERSION_MIN_REQUIRED >= 1090)
+//dmw #if (defined(__IPHONE_OS_VERSION_MIN_REQUIRED) && __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000) || (defined(__MAC_OS_X_VERSION_MIN_REQUIRED) && __MAC_OS_X_VERSION_MIN_REQUIRED >= 1090)
 - (void)setProgressWithUploadProgressOfTask:(NSURLSessionUploadTask *)task
-                                   animated:(BOOL)animated;
-#endif
+                                   animated:(BOOL)animated NS_AVAILABLE(10_9, 7_0);
+//dmw #endif
 
 /**
  Binds the progress to the download progress of the specified session task.
@@ -56,10 +56,10 @@
  @param task The session task.
  @param animated `YES` if the change should be animated, `NO` if the change should happen immediately.
  */
-#if (defined(__IPHONE_OS_VERSION_MIN_REQUIRED) && __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000) || (defined(__MAC_OS_X_VERSION_MIN_REQUIRED) && __MAC_OS_X_VERSION_MIN_REQUIRED >= 1090)
+//dmw #if (defined(__IPHONE_OS_VERSION_MIN_REQUIRED) && __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000) || (defined(__MAC_OS_X_VERSION_MIN_REQUIRED) && __MAC_OS_X_VERSION_MIN_REQUIRED >= 1090)
 - (void)setProgressWithDownloadProgressOfTask:(NSURLSessionDownloadTask *)task
-                                     animated:(BOOL)animated;
-#endif
+                                     animated:(BOOL)animated NS_AVAILABLE(10_9, 7_0);
+//dmw #endif
 
 ///------------------------------------
 /// @name Setting Session Task Progress

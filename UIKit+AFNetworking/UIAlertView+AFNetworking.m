@@ -26,9 +26,9 @@
 
 #import "AFURLConnectionOperation.h"
 
-#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000
+//dmw #if __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000
 #import "AFURLSessionManager.h"
-#endif
+//dmw #endif
 
 static void AFGetAlertViewTitleAndMessageFromError(NSError *error, NSString * __autoreleasing *title, NSString * __autoreleasing *message) {
     if (error.localizedDescription && (error.localizedRecoverySuggestion || error.localizedFailureReason)) {
@@ -50,9 +50,10 @@ static void AFGetAlertViewTitleAndMessageFromError(NSError *error, NSString * __
 
 @implementation UIAlertView (AFNetworking)
 
-#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000
+//dmw #if __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000
+
 + (void)showAlertViewForTaskWithErrorOnCompletion:(NSURLSessionTask *)task
-                                         delegate:(id)delegate
+                                         delegate:(id)delegate NS_AVAILABLE_IOS(7_0)
 {
     [self showAlertViewForTaskWithErrorOnCompletion:task delegate:delegate cancelButtonTitle:NSLocalizedStringFromTable(@"Dismiss", @"AFNetworking", @"UIAlertView Cancel Button Title") otherButtonTitles:nil, nil];
 }
@@ -60,7 +61,7 @@ static void AFGetAlertViewTitleAndMessageFromError(NSError *error, NSString * __
 + (void)showAlertViewForTaskWithErrorOnCompletion:(NSURLSessionTask *)task
                                          delegate:(id)delegate
                                 cancelButtonTitle:(NSString *)cancelButtonTitle
-                                otherButtonTitles:(NSString *)otherButtonTitles, ... NS_REQUIRES_NIL_TERMINATION
+                                otherButtonTitles:(NSString *)otherButtonTitles, ... NS_REQUIRES_NIL_TERMINATION  NS_AVAILABLE_IOS(7_0)
 {
     __block id observer = [[NSNotificationCenter defaultCenter] addObserverForName:AFNetworkingTaskDidFinishNotification object:task queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *notification) {
 
@@ -75,7 +76,7 @@ static void AFGetAlertViewTitleAndMessageFromError(NSError *error, NSString * __
         [[NSNotificationCenter defaultCenter] removeObserver:observer name:AFNetworkingTaskDidFinishNotification object:notification.object];
     }];
 }
-#endif
+//dmw #endif
 
 #pragma mark -
 
